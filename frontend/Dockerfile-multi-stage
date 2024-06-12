@@ -1,0 +1,25 @@
+FROM maven:3.9.7-eclipse-temurin-21-alpine as build
+
+COPY ./src /src 
+COPY ./pom.xml pom.xml
+
+RUN --mount=type=cache,target=/root/.m2 mvn clean verify
+
+
+FROM quay.io/drsylent/cubix/block2/optional-base:ubuntu22 as runtime
+
+USER 0
+RUN apt-get -y update
+RUN apt-get -y install openjdk-21-jre-headless
+RUN rm -rf /var/lib/apt/lists/*
+
+EXPOSE 8080
+
+ARG BUILDER_USERNAME
+LABEL image.builder=${BUILDER_USERNAME}
+
+COPY --from=build ./target/*.jar  app.jar
+
+ENV JAR_ARGS=
+ENV JAVA_OPTS=
+ENTRYPOINT exec java $JAVA_OPTS -jar app.jar $JAR_ARGS
