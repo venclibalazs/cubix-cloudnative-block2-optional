@@ -1,0 +1,6 @@
+GET http://localhost:8080/frontend
+{
+"msForReply": 3,
+"frontendMessage": "env",
+"backendSourceData": "cubix"
+}

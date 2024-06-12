@@ -1,0 +1,13 @@
+services:
+    frontend:
+        image: second-optional:latest
+        container_name: frontend
+        ports:
+        - 8080:8080
+        environment:
+        - JAVA_OPTS=-Dfrontend.default.message=env
+        - JAR_ARGS=--spring.main.banner-mode=off
+        - BACKEND_URL=http://backend:8080
+    backend:
+        image: quay.io/drsylent/cubix/block2/optional-backend:springboot3-cubix
+        container_name: backend
