@@ -11,3 +11,5 @@ services:
     backend:
         image: quay.io/drsylent/cubix/block2/optional-backend:springboot3-cubix
         container_name: backend
+        volumes:
+        - ./application.properties:/var/opt/appconfig/application.properties

@@ -12,13 +12,15 @@ USER 0
 RUN apt-get -y update
 RUN apt-get -y install openjdk-21-jre-headless
 RUN rm -rf /var/lib/apt/lists/*
+RUN rm /var/lib/dpkg/info/libc-bin.* 
 
+USER 1001
 EXPOSE 8080
 
 ARG BUILDER_USERNAME
 LABEL image.builder=${BUILDER_USERNAME}
 
-COPY --from=build ./target/*.jar  app.jar
+COPY --from=build --chown=1001 ./target/*.jar  app.jar
 
 ENV JAR_ARGS=
 ENV JAVA_OPTS=

@@ -6,20 +6,6 @@
 	I have no name!@735bcd73a5ba:/$ cat /var/opt/appconfig/application.properties
 	data.source.findmeout=webuni
 
-A megoldás:
-1. I have no name!@735bcd73a5ba:/$ echo data.source.findmeout=cubix > /var/opt/appconfig/application.properties
-	I have no name!@735bcd73a5ba:/$ cat /var/opt/appconfig/application.properties
-	data.source.findmeout=cubix
-	I have no name!@735bcd73a5ba:/$ exit
-2. docker commit optional-backapp quay.io/drsylent/cubix/block2/optional-backend:springboot3-cubix
-3. docker run --name optional-backapp-cubix quay.io/drsylent/cubix/block2/optional-backend:springboot3-cubix
-4. docker exec -ti optional-backapp-cubix /bin/bash
-	I have no name!@1c4fe1e206be:/$ cat /var/opt/appconfig/application.properties
-	data.source.findmeout=cubix
-
-B megoldás:
-1. echo data.source.findmeout=cubix > application.properties
-2. docker run --name optional-backapp -v "${PWD}/application.properties:/var/opt/appconfig/application.properties" quay.io/drsylent/cubix/block2/optional-backend:springboot3
-3. docker exec -ti optional-backapp /bin/bash
-	I have no name!@d1af1539d177:/$ cat /var/opt/appconfig/application.properties
-	data.source.findmeout=cubix
+4. docker cp optional-backapp:/var/opt/appconfig/application.properties ./appliaction.properties
+5. Edit application.properties: webuni->cubix
+6. docker run --name optional-backapp -v "${PWD}/application.properties:/var/opt/appconfig/application.properties" quay.io/drsylent/cubix/block2/optional-backend:springboot3
