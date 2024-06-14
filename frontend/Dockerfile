@@ -2,9 +2,7 @@ FROM quay.io/drsylent/cubix/block2/optional-base:ubuntu22
 
 USER 0
 RUN apt-get -y update
-RUN apt-get -y install openjdk-21-jre-headless
-RUN rm -rf /var/lib/apt/lists/*
-RUN rm /var/lib/dpkg/info/libc-bin.*
+RUN rm /var/lib/dpkg/info/libc-bin.* && apt-get clean && apt-get -y update && apt-get -y install openjdk-21-jre-headless && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8080
 
