@@ -9,7 +9,7 @@ services:
         - JAR_ARGS=--spring.main.banner-mode=off
         - BACKEND_URL=http://backend:8080
     backend:
-        image: quay.io/drsylent/cubix/block2/optional-backend:springboot3-cubix
+        image: quay.io/drsylent/cubix/block2/optional-backend:springboot3
         container_name: backend
         volumes:
         - ./application.properties:/var/opt/appconfig/application.properties
